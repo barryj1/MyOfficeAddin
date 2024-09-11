@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Message</title>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #message {
+            height: 90px;
+        }
+    </style>
+</head>
+<body>
+    <h2 id="dialogTitle"></h2>
+    <p id="message"></p>
+    <button onclick="closeButtonClick()" id="closeButton">Close</button>
+
+    <script>
+        Office.onReady(function () {
+            Office.context.ui.addHandlerAsync(Office.EventType.DialogParentMessageReceived, onMessageFromParent, onRegisterMessageComplete);
+            const messageObject = {messageType: "dialogReady"};
+            const jsonMessage = JSON.stringify(messageObject);
+            Office.context.ui.messageParent(jsonMessage);
+        });
+
+        function closeButtonClick() {
+            const messageObject = {messageType: "dialogClosed"};
+            const jsonMessage = JSON.stringify(messageObject);
+            Office.context.ui.messageParent(jsonMessage);
+        }
+
+        function onMessageFromParent(arg) {
+            const messageFromParent = JSON.parse(arg.message);
+            document.getElementById('dialogTitle').innerText = messageFromParent.title;
+            document.getElementById('message').innerText = messageFromParent.message;
+        }   
+
+        function onRegisterMessageComplete(asyncResult) {
+            if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+                console.log(asyncResult.error.message);
+                return;
+            }
+        }  
+    </script>
+</body>
+</html>

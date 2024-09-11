@@ -1,0 +1,70 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License. -->
+<!-- This file shows how to design a first-run page that provides a welcome screen to the user about the features of the add-in. -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Task Pane Add-in</title>
+
+    <!-- SignalR-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft.signalr/5.0.11/signalr.min.js"></script>
+
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+
+    <!-- For more information on Fluent UI, visit https://developer.microsoft.com/fluentui#/. -->
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css"/>
+
+    <!-- Template styles -->
+    <link href="taskpane.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="taskpane.js"></script>
+</head>
+
+<body class="ms-font-m ms-welcome ms-Fabric">
+    <!-- <header class="ms-welcome__header ms-bgColor-neutralLighter">
+        <img width="200" height="100" src="../../assets/uspto_seal_full_color.jpg" alt="USPTO" title="USPTO" />
+    </header> -->
+    <section id="sideload-msg" class="ms-welcome__main">
+        <h2 class="ms-font-xl">Please <a target="_blank" href="https://learn.microsoft.com/office/dev/add-ins/testing/test-debug-office-add-ins#sideload-an-office-add-in-for-testing">sideload</a> your add-in to see app body.</h2>
+    </section>
+    <main id="app-body" class="ms-welcome__main" style="display: none;">     
+        <div class="fptabs">
+            <!-- <button class="fptab" data-type="all" aria-pressed="false" role="button">All</button> -->
+            <button class="fptab active" data-type="subjects" aria-pressed="true" role="button">Subject</button>
+            <button class="fptab" data-type="categories" aria-pressed="false" role="button">Categories</button>
+            <!-- <button class="fptab" data-type="alphabetical" aria-pressed="false" role="button">Alphabetical</button>-->
+            <button class="fptab" data-type="custom" aria-pressed="false" role="button">Custom</button> 
+        </div>   
+        <div class="accordion" id="accordion"></div>
+        <div class="section accordion-container">
+            <div class="header accordion-header active" data-content="form-paragraph" role="heading" aria-level="3"><div class="accordion-button expanded" role="button" aria-controls="text-content-29" aria-expanded="true" tabindex="0">
+                <div class="title">
+                    <span class="toggler" aria-hidden="true"></span>
+                    <span class="title-text">Form Paragraph Text</span>
+                </div>
+            </div></div>
+            <div class="content text-content expanded" id="text-content29" role="region">
+                <div class="fp-content"><div class="section-content" id="paragraph-text" contenteditable="false" tabindex="0" readonly="" aria-readonly="true" role="textbox" aria-label="Form Paragraph Text" data-id="328"><p>A request for continued examination under 37 CFR 1.114 was filed in this application after appeal to the Patent Trial and Appeal Board, but prior to a decision on the appeal. Since this application is eligible for continued examination under 37 CFR 1.114 and the fee set forth in 37 CFR 1.17(e) has been timely paid, the appeal has been withdrawn pursuant to 37 CFR 1.114 and prosecution in this application has been reopened pursuant to 37 CFR 1.114. Applicant’s submission filed on <b>[ 1 ]</b> has been entered.</p></div></div>
+            </div>
+        </div>
+        <div class="section accordion-container">
+            <div class="header accordion-header active" data-content="form-paragraph" role="heading" aria-level="3"><div class="accordion-button expanded" role="button" aria-controls="text-content-29" aria-expanded="true" tabindex="0">
+                <div class="title">
+                    <span class="toggler" aria-hidden="true"></span>
+                    <span class="title-text">Examiner Notes</span>
+                </div>
+            </div></div>
+            <div class="content text-content expanded" id="text-content29" role="region">
+                <div class="fp-content"><div class="section-content" id="examiner-note" contenteditable="false" tabindex="0" readonly="" aria-readonly="true" role="textbox" aria-label="Form Paragraph Text" data-id="328"><p>A request for continued examination under 37 CFR 1.114 was filed in this application after appeal to the Patent Trial and Appeal Board, but prior to a decision on the appeal. Since this application is eligible for continued examination under 37 CFR 1.114 and the fee set forth in 37 CFR 1.17(e) has been timely paid, the appeal has been withdrawn pursuant to 37 CFR 1.114 and prosecution in this application has been reopened pursuant to 37 CFR 1.114. Applicant’s submission filed on <b>[ 1 ]</b> has been entered.</p></div></div>
+            </div>
+        </div>
+        <button class="ms-Button" id="insert-paragraph" disabled>Insert Paragraph</button>
+        <button class="ms-Button" id="save-data">Save</button>
+    </main>
+</body>
+
+</html>
